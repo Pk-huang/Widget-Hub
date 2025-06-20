@@ -1,0 +1,54 @@
+/* src/styles/theme.css */
+
+/* 全域主題樣式容器 */
+.theme-light {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.theme-dark {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+
+/* 卡片樣式 */
+.theme-light .card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  color: #212529;
+}
+
+.theme-dark .card {
+  background-color: #2c2c2c;
+  border: 1px solid #444;
+  color: #f1f1f1;
+}
+
+/* 按鈕 hover 改亮一些 */
+.theme-dark .btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* 鏈接樣式 */
+.theme-light a {
+  color: #0d6efd;
+}
+
+.theme-dark a {
+  color: #66b2ff;
+}
+
+
+/* src/styles/theme.css */
+
+/* 過渡動畫加入整個主題容器 */
+.theme-light,
+.theme-dark {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 如果你還想更滑順，可以加 body */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

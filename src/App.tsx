@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, NavLink } from 'react-router-dom';
+import WidgetPage from './pages/WidgetPage';
+// import SettingsPage from './pages/SettingsPage';
+// import PreviewPage from './pages/PreviewPage';
+import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
+import ToggleThemeUI from './components/ThemeToggleUI';
+import './style/theme.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { theme } = useTheme();
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className={`min-vh-100 theme-${theme}}`}>
+      <div className=" py-4">
+        {children}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <>
+      <ThemeProvider>
+        <Layout>
+          <nav className="navbar navbar-expand navbar-light bg-light px-4 mb-3">
+            <a className="navbar-brand" href="#">Widget Hub</a>
+            <div className="navbar-nav">
+              <NavLink to="/widgets" className="nav-link">Widgets</NavLink>
+              <NavLink to="/settings" className="nav-link">Settings</NavLink>
+              <NavLink to="/preview" className="nav-link">Preview</NavLink>
+            </div>
+            <div className="ml-auto">
+              <ToggleThemeUI />
+            </div>
+          </nav>
+          <div className="container">
+            {/* <Routes>
+              <Route path="/widgets" element={<WidgetPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/preview" element={<PreviewPage />} />
+              <Route path="*" element={<p>請選擇一個頁面</p>} />
+            </Routes> */}
+            <WidgetPage />
+          </div>
+
+        </Layout>
+
+      </ThemeProvider>
+
+    </>
+  );
+}
+
