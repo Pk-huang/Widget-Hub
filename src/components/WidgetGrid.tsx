@@ -1,11 +1,12 @@
-import React from "react";
-import { WidgetCard } from "./UI/WidgetCard";
-import type { WidgetApi } from "../api/widgetApi";
+import WidgetCard from "./UI/WidgetCard";
+import { type WidgetItem } from "../api/widgetApi"; // ✔ 型別
+
 
 interface WidgetGridProps {
-  widgets: WidgetApi[];
+  widgets: WidgetItem[];
 }
 export const WidgetGrid = ({ widgets }: WidgetGridProps) => {
+  // console.log(widgets);
   return (
     <div className="row">
       {widgets.map((widget) => (

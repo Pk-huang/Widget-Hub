@@ -6,6 +6,7 @@ import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
 import ToggleThemeUI from './components/ThemeToggleUI';
 import './style/theme.css';
 
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { theme } = useTheme();
   return (
@@ -34,12 +35,12 @@ export default function App() {
             </div>
           </nav>
           <div className="container">
-            {/* <Routes>
+            <Routes>
               <Route path="/widgets" element={<WidgetPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/preview" element={<PreviewPage />} />
+              {/* <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/preview" element={<PreviewPage />} /> */}
               <Route path="*" element={<p>請選擇一個頁面</p>} />
-            </Routes> */}
+            </Routes>
             <WidgetPage />
           </div>
 

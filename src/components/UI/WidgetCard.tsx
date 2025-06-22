@@ -1,18 +1,24 @@
-import { widgetApi } from "../../api/widgetApi";
+import React from "react";
+import { widgetData, type WidgetItem } from "../../api/widgetApi"; // ✔ 型別
 
-interface WidgetData {
-    data:WidgetData;
-}   
-
-export const WidgetCard = ({data}:WidgetData) => {
-    return (
-        <div className="card col-4 m-2">
-            <div className="card-top"></div>
-            <div className="card-body">
-                <h5 className="card-title">{data.category}</h5>
-                <p className="card-text">{data.description}.</p>
-                <button className="btn btn-primary">Go somewhere</button>
-            </div>
-        </div>
-    );
+interface WidgetCardProps {
+  data: WidgetItem; // ✔ 這樣才會正確
 }
+
+function WidgetCard({ data }: WidgetCardProps) {
+    console.log(widgetData)
+  return (
+    <div className="card col-4 m-2">
+      <div className="card-top p-2 d-flex justify-content-between align-items-center">
+        <h5 className="card-title">{data.name}</h5>
+        <span className="badge bg-secondary">{data.category}</span>
+      </div>
+      <div className="card-body">
+        <p className="card-text">{data.description}</p>
+        <button className="btn btn-primary">Go somewhere</button>
+      </div>
+    </div>
+  );
+}
+
+export default WidgetCard;
