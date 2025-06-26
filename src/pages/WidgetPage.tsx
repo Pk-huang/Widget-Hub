@@ -1,16 +1,17 @@
 import { WidgetGrid } from '../components/WidgetGrid';
-import  WidgetPageFuction  from '../hooks/widgetsfuction';
-
+import { useWidgetPage } from '../hooks/widgetsfuction';
+import { WidgetFilter } from '../components/WidgetFilter';
 
 
 export default function WidgetPage() {
-  const { widgets, handleToggleFavorite } = WidgetPageFuction();
+  const { handleToggleFavorite, setSearchTerm, searchTerm, filteredWidgets } = useWidgetPage();
 
 
   return (
     <div className="container py-4">
       <h1 className="mb-4">Widgets</h1>
-      <WidgetGrid widgets={widgets} onToggleFavorite={handleToggleFavorite} />
+      <WidgetFilter searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      <WidgetGrid widgets={filteredWidgets} onToggleFavorite={handleToggleFavorite} />
     </div>
   );
 }

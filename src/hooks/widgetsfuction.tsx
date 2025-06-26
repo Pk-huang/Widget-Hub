@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { widgetData, type WidgetItem } from '../api/widgetApi';
 
-export default function WidgetPage() {
+export const useWidgetPage = () => {
     // 定義一個常數來存儲本地存儲的鍵
     // 這樣可以避免在多個地方硬編碼同一個鍵
     // 如果需要更改存儲鍵，只需在這裡修改一次即可     
 
     const STORAGE_KEY = 'widget_list';
+    
     const [widgets, setWidgets] = useState<WidgetItem[]>([]);
+    const [searchTerm, setSearchTerm] = useState("")
+
+    const filteredWidgets =
+        searchTerm.trim() === ""
+            ? widgets // ✅ 沒有搜尋字，直接顯示全部
+            : widgets.filter(widget => widget.name.toLowerCase().includes(searchTerm.toLowerCase()) ); // ✅ 根據搜尋字過濾小工具
+
+
 
     useEffect(() => {
         const stored = localStorage.getItem(STORAGE_KEY);
@@ -40,6 +49,7 @@ export default function WidgetPage() {
     useEffect(() => {
         setWidgets(widgetData); // 一進入畫面就設定資料
 
-    }, []);  
-    return{ widgets, handleToggleFavorite}
+    }, []);
+    return { handleToggleFavorite, setSearchTerm, searchTerm, filteredWidgets }
 }
+

@@ -23,16 +23,19 @@ export default function App() {
     <>
       <ThemeProvider>
         <Layout>
-          <nav className="navbar navbar-expand navbar-light bg-light px-4 mb-3">
+          <nav className="navbar navbar-expand navbar-light bg-light px-4 mb-3 container">
             <a className="navbar-brand" href="#">Widget Hub</a>
             <div className="navbar-nav">
               <NavLink to="/widgets" className="nav-link">Widgets</NavLink>
               <NavLink to="/settings" className="nav-link">Settings</NavLink>
               <NavLink to="/preview" className="nav-link">Preview</NavLink>
             </div>
+
             <div className="ml-auto">
               <ToggleThemeUI />
             </div>
+       
+
           </nav>
           <div className="container">
             <Routes>
