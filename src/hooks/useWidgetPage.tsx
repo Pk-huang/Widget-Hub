@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { widgetData, type WidgetItem } from '../api/widgetApi';
+import { filiterByCategory, filterBySearchTerm, filterWidgetsFavorites } from '../components/utils/widgetFunctions';
+
 
 export const useWidgetPage = () => {
     // 定義一個常數來存儲本地存儲的鍵
@@ -7,14 +9,20 @@ export const useWidgetPage = () => {
     // 如果需要更改存儲鍵，只需在這裡修改一次即可     
 
     const STORAGE_KEY = 'widget_list';
-    
+
     const [widgets, setWidgets] = useState<WidgetItem[]>([]);
     const [searchTerm, setSearchTerm] = useState("")
+    const [category, seletCatory] = useState("All") // ✅ 新增 category 狀態
 
-    const filteredWidgets =
-        searchTerm.trim() === ""
-            ? widgets // ✅ 沒有搜尋字，直接顯示全部
-            : widgets.filter(widget => widget.name.toLowerCase().includes(searchTerm.toLowerCase()) ); // ✅ 根據搜尋字過濾小工具
+    const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+
+    filterWidgetsFavorites(widgets, showFavoritesOnly, category, searchTerm);
+
+
+    const filteredWidgets = filterBySearchTerm(
+        filiterByCategory(widgets, category),
+        searchTerm
+    );
 
 
 
@@ -50,6 +58,6 @@ export const useWidgetPage = () => {
         setWidgets(widgetData); // 一進入畫面就設定資料
 
     }, []);
-    return { handleToggleFavorite, setSearchTerm, searchTerm, filteredWidgets }
+    return { handleToggleFavorite, setSearchTerm, searchTerm, filteredWidgets, seletCatory, category ,setShowFavoritesOnly ,showFavoritesOnly }
 }
 
